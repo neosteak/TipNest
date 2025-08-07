@@ -12,7 +12,7 @@
 
 **A production-ready DeFi staking protocol showcasing advanced Web3 development practices**
 
-[Live Demo](https://tipnest.vercel.app) | [Smart Contracts](contracts/) | [Frontend](frontend/)
+[View Preview](#-live-preview) | [Smart Contracts](contracts/) | [Frontend](frontend/)
 
 </div>
 
@@ -50,6 +50,20 @@
 - **Type Safety**: Full TypeScript implementation
 - **Code Quality**: ESLint, Prettier, pre-commit hooks
 - **Documentation**: Comprehensive inline comments and guides
+
+## 🎬 Live Preview
+
+<div align="center">
+
+### 🏠 Landing Page Experience
+![Landing Page Demo](docs/demo/Landing.gif)
+*Smooth animations, interactive features showcase, and responsive design*
+
+### 💰 Staking Platform in Action
+![Staking Interface Demo](docs/demo/Staking.gif)
+*Connect wallet → Stake tokens → Watch real-time rewards → Claim rewards*
+
+</div>
 
 ## 🛠️ Tech Stack
 
@@ -149,7 +163,7 @@ The contracts are already deployed and verified on Polygon:
 
 Deploy to Vercel with one click:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/TipNest)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/neosteak/TipNest&root-directory=frontend&env=NEXT_PUBLIC_TIP_TOKEN_ADDRESS,NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS,NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,NEXT_PUBLIC_ALCHEMY_ID,NEXT_PUBLIC_NETWORK&envDescription=Configure%20your%20Web3%20environment%20variables&envLink=https://github.com/neosteak/TipNest/blob/main/frontend/.env.example)
 
 ## 🧪 Testing
 
