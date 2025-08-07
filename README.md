@@ -159,12 +159,6 @@ The contracts are already deployed and verified on Polygon:
 - **TIP Token**: [`0x57C1559B73561B756F3228e735195FdBCD860837`](https://polygonscan.com/address/0x57C1559B73561B756F3228e735195FdBCD860837)
 - **Staking Contract**: [`0x85cB11C123d06a13DECE7e6eA6ccF1E763c0393C`](https://polygonscan.com/address/0x85cB11C123d06a13DECE7e6eA6ccF1E763c0393C)
 
-### Frontend Deployment
-
-Deploy to Vercel with one click:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/neosteak/TipNest&root-directory=frontend&env=NEXT_PUBLIC_TIP_TOKEN_ADDRESS,NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS,NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,NEXT_PUBLIC_ALCHEMY_ID,NEXT_PUBLIC_NETWORK&envDescription=Configure%20your%20Web3%20environment%20variables&envLink=https://github.com/neosteak/TipNest/blob/main/frontend/.env.example)
-
 ## 🧪 Testing
 
 ```bash
