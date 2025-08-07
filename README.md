@@ -7,7 +7,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-[![Build](https://github.com/neosteak/TipNest/actions/workflows/build.yml/badge.svg)](https://github.com/neosteak/TipNest/actions/workflows/build.yml)
+[![Build Status](https://github.com/neosteak/TipNest/actions/workflows/main.yml/badge.svg)](https://github.com/neosteak/TipNest/actions/workflows/main.yml)
 [![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen)](test/)
 [![Slither](https://img.shields.io/badge/Slither-✓_Passed-green)](contracts/)
 [![Polygon](https://img.shields.io/badge/Deployed-Polygon-purple)](https://polygonscan.com/address/0x85cB11C123d06a13DECE7e6eA6ccF1E763c0393C)

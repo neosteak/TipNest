@@ -1,0 +1,31 @@
+name: Build Status
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install and Build
+      run: |
+        echo "Installing dependencies..."
+        npm install
+        echo "Compiling smart contracts..."
+        npx hardhat compile
+        echo "Build successful!"
+        
+    - name: Success Message
+      run: echo "✅ Build completed successfully!"
