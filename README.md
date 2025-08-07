@@ -161,34 +161,6 @@ The contracts are already deployed and verified on Polygon:
 - **TIP Token**: [`0x57C1559B73561B756F3228e735195FdBCD860837`](https://polygonscan.com/address/0x57C1559B73561B756F3228e735195FdBCD860837)
 - **Staking Contract**: [`0x85cB11C123d06a13DECE7e6eA6ccF1E763c0393C`](https://polygonscan.com/address/0x85cB11C123d06a13DECE7e6eA6ccF1E763c0393C)
 
-### Frontend Deployment
-
-#### Option 1: Deploy to Vercel (Recommended)
-
-1. **Fork this repository** to your GitHub account
-2. Go to [Vercel](https://vercel.com) and sign in with GitHub
-3. Click **"New Project"** and import your forked repository
-4. Configure the deployment:
-   - **Framework Preset**: Next.js
-   - **Root Directory**: `frontend`
-   - **Build Command**: `npm run build` (or leave default)
-   - **Output Directory**: `.next` (or leave default)
-5. Add environment variables (copy from `frontend/.env.local.example`):
-   ```
-   NEXT_PUBLIC_TIP_TOKEN_ADDRESS=0x57C1559B73561B756F3228e735195FdBCD860837
-   NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS=0x85cB11C123d06a13DECE7e6eA6ccF1E763c0393C
-   NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id
-   NEXT_PUBLIC_ALCHEMY_ID=your_alchemy_key
-   NEXT_PUBLIC_NETWORK=polygon
-   ```
-6. Click **"Deploy"**
-
-#### Option 2: Deploy to Netlify
-
-1. Fork and clone the repository
-2. Build locally: `cd frontend && npm run build`
-3. Deploy the `frontend/.next` folder to Netlify
-
 ## 🧪 Testing
 
 ```bash
