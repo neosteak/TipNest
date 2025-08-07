@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { time, loadFixture } from "@nomicfoundation/hardhat-network-helpers";
+import { time, loadFixture, anyValue } from "@nomicfoundation/hardhat-network-helpers";
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { TIPStaking, TIPToken } from "../../typechain-types";
 
