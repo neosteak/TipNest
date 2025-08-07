@@ -1,0 +1,52 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-contracts:
+    name: Build Smart Contracts
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Compile contracts
+      run: npx hardhat compile
+      
+  build-frontend:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install frontend dependencies
+      working-directory: ./frontend
+      run: npm install
+    
+    - name: Build frontend
+      working-directory: ./frontend
+      run: npm run build
+      env:
+        NEXT_PUBLIC_TIP_TOKEN_ADDRESS: "0x57C1559B73561B756F3228e735195FdBCD860837"
+        NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS: "0x85cB11C123d06a13DECE7e6eA6ccF1E763c0393C"
+        NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: "test-project-id"
+        NEXT_PUBLIC_ALCHEMY_ID: "demo"
+        NEXT_PUBLIC_NETWORK: "polygon"

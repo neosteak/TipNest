@@ -6,9 +6,11 @@
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Polygon](https://img.shields.io/badge/Polygon-Mainnet-purple)](https://polygon.technology/)
-[![Test Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen)](test/)
-[![Security](https://img.shields.io/badge/Security-Audited-green)](contracts/)
+
+[![Build](https://github.com/neosteak/TipNest/actions/workflows/build.yml/badge.svg)](https://github.com/neosteak/TipNest/actions/workflows/build.yml)
+[![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen)](test/)
+[![Slither](https://img.shields.io/badge/Slither-✓_Passed-green)](contracts/)
+[![Polygon](https://img.shields.io/badge/Deployed-Polygon-purple)](https://polygonscan.com/address/0x85cB11C123d06a13DECE7e6eA6ccF1E763c0393C)
 
 **A production-ready DeFi staking protocol showcasing advanced Web3 development practices**
 
@@ -161,9 +163,31 @@ The contracts are already deployed and verified on Polygon:
 
 ### Frontend Deployment
 
-Deploy to Vercel with one click:
+#### Option 1: Deploy to Vercel (Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/neosteak/TipNest&root-directory=frontend&env=NEXT_PUBLIC_TIP_TOKEN_ADDRESS,NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS,NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,NEXT_PUBLIC_ALCHEMY_ID,NEXT_PUBLIC_NETWORK&envDescription=Configure%20your%20Web3%20environment%20variables&envLink=https://github.com/neosteak/TipNest/blob/main/frontend/.env.example)
+1. **Fork this repository** to your GitHub account
+2. Go to [Vercel](https://vercel.com) and sign in with GitHub
+3. Click **"New Project"** and import your forked repository
+4. Configure the deployment:
+   - **Framework Preset**: Next.js
+   - **Root Directory**: `frontend`
+   - **Build Command**: `npm run build` (or leave default)
+   - **Output Directory**: `.next` (or leave default)
+5. Add environment variables (copy from `frontend/.env.local.example`):
+   ```
+   NEXT_PUBLIC_TIP_TOKEN_ADDRESS=0x57C1559B73561B756F3228e735195FdBCD860837
+   NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS=0x85cB11C123d06a13DECE7e6eA6ccF1E763c0393C
+   NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id
+   NEXT_PUBLIC_ALCHEMY_ID=your_alchemy_key
+   NEXT_PUBLIC_NETWORK=polygon
+   ```
+6. Click **"Deploy"**
+
+#### Option 2: Deploy to Netlify
+
+1. Fork and clone the repository
+2. Build locally: `cd frontend && npm run build`
+3. Deploy the `frontend/.next` folder to Netlify
 
 ## 🧪 Testing
 
@@ -188,6 +212,44 @@ npm run audit
 
 ## 📊 Architecture
 
+### System Architecture
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Wallet
+    participant StakingContract
+    participant TIPToken
+
+    User->>Frontend: Connect Wallet
+    Frontend->>Wallet: Request Connection
+    Wallet-->>Frontend: Connected
+    
+    User->>Frontend: Enter Stake Amount
+    Frontend->>Wallet: Request Approval
+    Wallet->>TIPToken: approve(stakingContract, amount)
+    TIPToken-->>Wallet: Approval Success
+    
+    Frontend->>Wallet: Request Stake
+    Wallet->>StakingContract: stake(amount)
+    StakingContract->>TIPToken: transferFrom(user, contract, amount)
+    TIPToken-->>StakingContract: Transfer Success
+    StakingContract-->>User: Emit Staked Event
+    
+    loop Every Second
+        StakingContract->>StakingContract: Calculate Rewards
+    end
+    
+    User->>Frontend: Claim Rewards
+    Frontend->>Wallet: Request Claim
+    Wallet->>StakingContract: claimRewards()
+    StakingContract->>TIPToken: transfer(user, rewards)
+    TIPToken-->>User: Rewards Received
+```
+
+### Component Architecture
+
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │                 │     │                 │     │                 │
@@ -203,7 +265,31 @@ npm run audit
 └─────────────────┘     └─────────────────┘     └─────────────────┘
 ```
 
-## 🔒 Security Features
+## 🔒 Security Features & Risk Mitigation
+
+### Security Implementation
+
+| Feature | Implementation | Purpose |
+|---------|---------------|---------|
+| **Reentrancy Protection** | ReentrancyGuard modifier | Prevents recursive calls attacks |
+| **Access Control** | Ownable pattern | Admin functions protection |
+| **Emergency Pause** | Pausable pattern | Circuit breaker for incidents |
+| **Integer Overflow** | Solidity 0.8+ | Automatic overflow protection |
+| **Input Validation** | require() statements | Prevents invalid states |
+| **CEI Pattern** | Check-Effects-Interactions | State changes before external calls |
+
+### Risk Analysis & Mitigation
+
+| Risk | Severity | Mitigation | Status |
+|------|----------|------------|--------|
+| **Smart Contract Bugs** | High | 100% test coverage + Slither audit | ✅ Mitigated |
+| **Reentrancy Attack** | High | ReentrancyGuard on all state-changing functions | ✅ Mitigated |
+| **Admin Key Compromise** | High | Multi-sig wallet recommended for production | ⚠️ Documented |
+| **Economic Attack (Bank Run)** | Medium | Sufficient reward reserves maintained | ✅ Mitigated |
+| **Front-Running** | Low | Commit-reveal pattern for future versions | 📝 Roadmap |
+| **Oracle Manipulation** | N/A | No external price feeds used | ✅ Not Applicable |
+
+### Audit Trail
 
 - **Reentrancy Protection**: All state changes follow CEI pattern
 - **Access Control**: Owner-only admin functions
