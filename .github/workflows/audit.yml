@@ -1,0 +1,53 @@
+name: Security Audit
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # Weekly on Monday
+  workflow_dispatch:
+
+jobs:
+  audit-dependencies:
+    name: Audit Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      
+      - name: Audit root dependencies
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+      
+      - name: Audit frontend dependencies
+        working-directory: ./frontend
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+      
+      - name: Run Snyk security scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=medium
+
+  smart-contract-audit:
+    name: Smart Contract Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run Mythril
+        uses: mythril/mythril-action@v1
+        with:
+          target: 'contracts/'
+        continue-on-error: true
+      
+      - name: Run Slither
+        uses: crytic/slither-action@v0.3.0
+        with:
+          target: 'contracts/'
+          slither-args: '--checklist'
+        continue-on-error: true

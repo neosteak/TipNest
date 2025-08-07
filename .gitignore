@@ -1,0 +1,38 @@
+node_modules
+.env
+.env.local
+.env.production
+!.env.example
+coverage
+coverage.json
+typechain-types
+cache
+artifacts
+dist
+
+# Frontend
+frontend/node_modules
+frontend/.next
+frontend/out
+frontend/.env.local
+frontend/.env.production
+!frontend/.env.example
+!frontend/.env.local.example
+
+# IDE
+.vscode
+.idea
+
+# Testing
+test-results
+playwright-report
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

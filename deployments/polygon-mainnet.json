@@ -1,0 +1,10 @@
+{
+  "network": "polygon",
+  "chainId": 137,
+  "tipToken": "0x57C1559B73561B756F3228e735195FdBCD860837",
+  "stakingContract": "0x85cB11C123d06a13DECE7e6eA6ccF1E763c0393C",
+  "deployer": "0x3cCBc9B51450a7429C48BeDd83058E61622f7f1a",
+  "deploymentTime": "2025-08-07T11:42:11.009Z",
+  "blockNumber": 74909230,
+  "initialRewards": "50000.0"
+}
